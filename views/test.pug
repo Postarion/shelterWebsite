@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+html
+    head
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700")
+        link(rel="stylesheet" href="/css/main.css")
+    body
+        .home.dog-app
+            header.app-header
+                .logo
+                    img.logo_icon(src="/home-icon.png")
+                    span.logo_text shelter for dogs
+                nav.app-nav
+                    ul.app-nav_list
+                        li.app-nav_list-item
+                            a.app-nav_link.app-nav_link--is-active(href="/") home
+                        li.app-nav_list-item
+                            a.app-nav_link(onclick="openLightBox()" style="cursor:pointer") Adopt a dog
+                        li.app-nav_list-item
+                            a.app-nav_link(href="/test")  contact
+            .wrapper
+                section.slogan
+                    h1.slogan_header
+                        |Adopt a dog. 
+                    h1.slogan_header 
+                        |Make a change.
+                    p.slogan_text
+                        | There is a lof of homeless dogs that suffers every day. 
+                        | All of them need care and warm home. You can change their life for better. Adopt a dog.
+                    .actions
+                        button.btn.btn--primary(onclick="openLightBox()") Adopt
+                        button.btn.btn--secondary Donate us
+            .lightbox(id="myLightBox" style="display: none;")
+                .lightbox_content
+                    h2.lightbox_header Make a change.
+                    form.lightbox_form(action="/applications" method="POST")
+                        .lightbox_form-control
+                            label.lightbox_label What's your name?
+                            input.lightbox_input(placeholder="Jan Kowalski" type="text" name="name")
+                        .lightbox_form-control
+                            label.lightbox_label What's your phone number?
+                            input.lightbox_input(placeholder="+ 48 000 000 000" type="text" name="phone")
+                        .lightbox_form-control
+                            label.lightbox_label Leave a message
+                            textarea.lightbox_input(placeholder="Feel free to ask us anything" rows="3" name="message")
+                        .lightbox_actions
+                            button.btn.btn--primary(onclick="closeLightBox()") Adopt a dog
+
+    if (formMessage.length)
+      .lightbox(id="myFeedBack")
+        .lightbox_content
+          h2.lightbox_header #{ formMessage }
+          .lightbox_actions.lightbox_actions--centered
+            button.btn.btn--primary(onclick="closeLightBox()") Close
+
+script(src="/js/cont.js")
