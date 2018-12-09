@@ -37,6 +37,33 @@ app.use((req, res, next)=>{
   next();
 });
 
+const mysql2 = require('mysql2');
+const connection = mysql2.createConnection({
+  host: 'localhost',
+  port: 3030,
+  user: 'root',
+  password: 'Password',
+  database: 'overment'
+});
+
+connection.connect((err) => {
+  if(err){throw err;}
+  console.log('MySql Connected...')
+});
+
+
+
+//Create DB
+app.get('/createdb', (req, res) =>{
+  let sql = 'CREATE DATABASE nowedb';
+  connection.query(sql, (err, result) =>{
+    if(err){throw err;}
+    console.log(result);
+    res.send('DB created...');
+  });
+});
+
+//stwórz bazędanych i zobacz gdzie będzie
 module.exports = app;
 
 /*Metody:
@@ -44,4 +71,12 @@ POST - zapisanie nowych danych
 PUT - przesyłanie i zmiana istniejących danych
 PATCH - aktualizacja istniejących danych
 DELETE - usunięcie danych
+*/
+
+/* Brak połączenia z MySQL
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'YourRootPassword';
+-- or
+CREATE USER 'foo'@'%' IDENTIFIED WITH mysql_native_password BY 'bar';
+-- then
+FLUSH PRIVILEGES;
 */

@@ -1,6 +1,15 @@
+const Application = require('../models/application');
+
 exports.store = (req, res) => {
-  req.flash('form', req.body.first_name + ' you are Amazing!');
-  res.redirect('/');
+
+  Application.create({
+    'name': req.body.name,
+    'phone': req.body.phone,
+    'message': req.body.message
+  }).then(function() {
+    req.flash('form', req.body.first_name + ' you are Amazing!');
+    res.redirect('/');
+  });
 };
 
 exports.normalizeData = (req, res, next)=>{
