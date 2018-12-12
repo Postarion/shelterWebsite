@@ -1,3 +1,4 @@
+require('dotenv').config({ path: '.env'});
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
@@ -5,6 +6,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const routes = require('./routes/index');
+const errorsHandler = require('./middleware/error');
 
 
 const app = express();
@@ -32,11 +34,9 @@ app.use(flash());
 
 app.use('/', routes);
 
-app.use((req, res, next)=>{
-  res.status(404).render('er404');
-  next();
-});
-
+app.use(errorsHandler.notFound);
+app.use(errorsHandler.catchErrors);
+/*
 const mysql2 = require('mysql2');
 const connection = mysql2.createConnection({
   host: 'localhost',
@@ -50,18 +50,10 @@ connection.connect((err) => {
   if(err){throw err;}
   console.log('MySql Connected...')
 });
+*/
 
 
 
-//Create DB
-app.get('/createdb', (req, res) =>{
-  let sql = 'CREATE DATABASE nowedb';
-  connection.query(sql, (err, result) =>{
-    if(err){throw err;}
-    console.log(result);
-    res.send('DB created...');
-  });
-});
 
 //stwórz bazędanych i zobacz gdzie będzie
 module.exports = app;

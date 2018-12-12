@@ -213,3 +213,6 @@ body {
 .lightbox_actions--centered { 
 	text-align: center; 
 }
+.lightbox_error { 
+	color: red; 
+}

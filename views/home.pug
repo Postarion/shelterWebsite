@@ -3,11 +3,13 @@ html
     head
         link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700")
         link(rel="stylesheet" href="/css/main.css")
+        script(src="/js/cont.js")
     body
-        .home.dog-app
+        
+        .home.dog-app(id="test" showLightbox='false')
             header.app-header
                 .logo
-                    img.logo_icon(src="/home-icon.png")
+                    img.logo_icon(src="/home-icon.png" onLoad='slb()')
                     span.logo_text shelter for dogs
                 nav.app-nav
                     ul.app-nav_list
@@ -16,7 +18,7 @@ html
                         li.app-nav_list-item
                             a.app-nav_link(onclick="openLightBox()" style="cursor:pointer") Adopt a dog
                         li.app-nav_list-item
-                            a.app-nav_link(href="/contact")  contact
+                            a.app-nav_link(href="/test")  contact
             .wrapper
                 section.slogan
                     h1.slogan_header
@@ -35,21 +37,29 @@ html
                     form.lightbox_form(action="/applications" method="POST")
                         .lightbox_form-control
                             label.lightbox_label What's your name?
-                            input.lightbox_input(placeholder="Jan Kowalski" type="text" name="name")
+                            input.lightbox_input(placeholder="Jan Kowalski" type="text" name="name" value=validated ? validated.name : '')
+                            if (errors && errors.name)
+                                param(id="slb" value='true' )
+                                p.lightbox_error #{ errors.name.msg }
                         .lightbox_form-control
                             label.lightbox_label What's your phone number?
-                            input.lightbox_input(placeholder="+ 48 000 000 000" type="text" name="phone")
+                            input.lightbox_input(placeholder="+ 48 000 000 000" type="text" name="phone" value=validated ? validated.phone : '')
+                            if (errors && errors.phone)
+                                param(id="slb" value='true' )
+                                p.lightbox_error #{ errors.phone.msg }
                         .lightbox_form-control
                             label.lightbox_label Leave a message
-                            textarea.lightbox_input(placeholder="Feel free to ask us anything" rows="3" name="message")
+                            textarea.lightbox_input(placeholder="Feel free to ask us anything" rows="3" name="message" value=validated ? validated.message: '')
+                            if (errors && errors.message)
+                                param(id="slb" value='true' )
+                                p.lightbox_error #{ errors.message.msg }
                         .lightbox_actions
                             button.btn.btn--primary(onclick="closeLightBox()") Adopt a dog
 
-    if (formMessage.length)
+    if (formMessage && formMessage.length)
       .lightbox(id="myFeedBack")
         .lightbox_content
           h2.lightbox_header #{ formMessage }
           .lightbox_actions.lightbox_actions--centered
             button.btn.btn--primary(onclick="closeLightBox()") Close
-
 script(src="/js/cont.js")

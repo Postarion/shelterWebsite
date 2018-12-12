@@ -10,6 +10,8 @@ router.get('/contact', pageCtr.contact);
 router.get('/test', pageCtr.test);
 
 router.post('/applications', 
+  appCtr.validate,
+  appCtr.checkValidation,
   appCtr.normalizeData,
   appCtr.store);
 

@@ -35,7 +35,9 @@ html
                     form.lightbox_form(action="/applications" method="POST")
                         .lightbox_form-control
                             label.lightbox_label What's your name?
-                            input.lightbox_input(placeholder="Jan Kowalski" type="text" name="name")
+                            input.lightbox_input(placeholder="Jan Kowalski" type="text" name="name" value=validated ? validated.name : '')
+                            if (errors && errors.name)
+								p.lightbox_error #{ errors.name.msg }
                         .lightbox_form-control
                             label.lightbox_label What's your phone number?
                             input.lightbox_input(placeholder="+ 48 000 000 000" type="text" name="phone")
@@ -53,3 +55,13 @@ html
             button.btn.btn--primary(onclick="closeLightBox()") Close
 
 script(src="/js/cont.js")
+
+//-
+	else
+		if (errors)
+		<section class="errors">
+			<ul>
+				foreach(errors)
+				<li>#{this.msg}</li>
+			</ul>
+		</section>
