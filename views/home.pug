@@ -3,8 +3,9 @@ html
     head
         link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700")
         link(rel="stylesheet" href="/css/main.css")
+        script(src="/js/cont.js")
     body
-        .home.dog-app
+        .home.dog-app(data-lightbox=showLightbox)
             header.app-header
                 .logo
                     img.logo_icon(src="/home-icon.png")
@@ -29,27 +30,33 @@ html
                     .actions
                         button.btn.btn--primary(onclick="openLightBox()") Adopt
                         button.btn.btn--secondary Donate us
-            .lightbox(id="myLightBox" style="display: none;")
+            .lightbox(v-show="formLightbox == true" id="myLightBox" style="display: none;")
                 .lightbox_content
                     h2.lightbox_header Make a change.
                     form.lightbox_form(action="/applications" method="POST")
                         .lightbox_form-control
                             label.lightbox_label What's your name?
-                            input.lightbox_input(placeholder="Jan Kowalski" type="text" name="name")
+                            input.lightbox_input(placeholder="Jan Kowalski" type="text" name="name" value=validated ? validated.name : '')
+                            if (errors && errors.name)
+                                p.lightbox_error #{ errors.name.msg }
                         .lightbox_form-control
                             label.lightbox_label What's your phone number?
-                            input.lightbox_input(placeholder="+ 48 000 000 000" type="text" name="phone")
+                            input.lightbox_input(placeholder="+ 48 000 000 000" type="text" name="phone" value=validated ? validated.phone : '')
+                            if (errors && errors.phone)
+                                p.lightbox_error #{ errors.phone.msg }
                         .lightbox_form-control
                             label.lightbox_label Leave a message
-                            textarea.lightbox_input(placeholder="Feel free to ask us anything" rows="3" name="message")
+                            textarea.lightbox_input(placeholder="Feel free to ask us anything" rows="3" name="message" value=validated ? validated.message: '')
+                            if (errors && errors.message)
+                                p.lightbox_error #{ errors.message.msg }
                         .lightbox_actions
                             button.btn.btn--primary(onclick="closeLightBox()") Adopt a dog
 
-    if (formMessage.length)
+    if (formMessage && formMessage.length)
       .lightbox(id="myFeedBack")
         .lightbox_content
           h2.lightbox_header #{ formMessage }
           .lightbox_actions.lightbox_actions--centered
             button.btn.btn--primary(onclick="closeLightBox()") Close
-
+script(src="https://cdn.jsdelivr.net/npm/vue" type="text/javascript")
 script(src="/js/cont.js")

@@ -7,9 +7,10 @@ const appCtr = require('../controllers/appCtr');
 
 router.get('/', pageCtr.home);
 router.get('/contact', pageCtr.contact);
-router.get('/test', pageCtr.test);
 
 router.post('/applications', 
+  appCtr.validate,
+  appCtr.checkValidation,
   appCtr.normalizeData,
   appCtr.store);
 

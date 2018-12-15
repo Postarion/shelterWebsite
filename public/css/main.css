@@ -106,6 +106,14 @@ body {
 	max-width: 500px; 
 }
 
+.contact_text { 
+	font-size: 22px; 
+	color: #d0c4bc; 
+	font-weight: 400; 
+	line-height: 24px; 
+	max-width: 500px; 
+}
+
 /*Buttons*/
 .actions { 
 	margin-top: 50px; 
@@ -212,4 +220,7 @@ body {
 }
 .lightbox_actions--centered { 
 	text-align: center; 
+}
+.lightbox_error { 
+	color: red; 
 }
