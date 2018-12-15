@@ -1,5 +1,6 @@
 Hello,
-It is dog shelter web site. 
+
+This is dog shelter web site. 
 
 It can connect to your local server and store user informations.
 
