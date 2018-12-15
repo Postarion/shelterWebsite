@@ -36,5 +36,4 @@ app.use('/', routes);
 
 app.use(errorsHandler.notFound);
 app.use(errorsHandler.catchErrors);
-
 module.exports = app;

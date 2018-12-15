@@ -22,7 +22,7 @@ function openLightBox() {
     lightBox.style.display = "flex";
     document.getElementById('myOverlay').style.display = "block";
 }
-
+//close lightbox when click outside of the box
 window.onclick = (event)=>{
     if (event.target == lightBox||event.target == feedBack){
         lightBox.style.display = "none";
