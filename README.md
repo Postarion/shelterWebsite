@@ -9,7 +9,7 @@ or
 
 To change server properties go to: config/knexflie.js and change this lines of code:
     host: 'localhost',
-    port: 
-    user: 
-    password: 
-    database: 
+    port: xxxxxx,
+    user: xxxxxx,
+    password: xxxxxx,
+    database: xxxxxx,
