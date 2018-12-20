@@ -147,7 +147,11 @@ body {
 	margin-right: 20px; 
 }
 
-.app-footer { position: absolute; bottom: 15px; right: 15px; opacity: .5; }
+.app-footer { 
+	position: absolute; 
+	bottom: 15px; right: 15px; 
+	opacity: .5; 
+}
 
 /* lightbox */
 .lightbox{ 
